@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title th:utext="Products" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+<h2>List of all Products</h2>
+<body>
+	<div class="container my-2">
+		<div class="card">
+			<div class="card-body">
+				<div th:switch="${products}" class="container my-4">
+					<p class="my-5">
+						<a th:href="@{/new_Product}" class="btn btn-primary">ADD Product</a>
+					</p>
+					<div class="col-md-10">
+						<h2 th:case="null">no product found!</h2>
+						<div th:case="*">
+							<table class="table table-stripped table-responsive-md">
+								<thead>
+									<tr>
+										<th>ProductID</th>
+										<th>ProductName</th>
+										<th>Category</th>
+										<th></th>
+										<th></th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="product : ${products}">
+										<td th:text="${product.id}"></td>
+										<td th:text="${product.name}"></td>
+										<td th:text="${product.category}"></td>
+										<td><a th:href="@{/update_product/{pId}(pId=${product.id})}"
+										 class="btn btn-primary" >Edit</a></td>
+										<td><a th:href="@{/delete_product/{pId}(pId=${product.id})}" class="btn btn-primary">Delete</a></td>
+									</tr>
+
+								</tbody>
+							</table>
+</body>
+</html>
